@@ -33,6 +33,7 @@ void Schedule::resume(int id)
 
     Status status = co -> getStatus();
     ucontext_t& context = co -> getContext();
+    uintptr_t ptr;
     switch(status) {
         case COROUTINE_READY:
             getcontext(&context);
@@ -41,7 +42,7 @@ void Schedule::resume(int id)
             context.uc_link = &main_;
             running_ = id;
             co -> setStatus(COROUTINE_RUNNING);
-            uintptr_t ptr = (uintptr_t)this;
+            ptr = (uintptr_t)this;
             makecontext(&context, (void(*)(void))mainFunc, 2, (uint32_t)ptr, (uint32_t)(ptr >> 32));
             swapcontext(&main_, &context);
             break;

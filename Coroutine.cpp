@@ -1,4 +1,6 @@
 #include "Coroutine.h"
+#include <cassert>
+#include <string.h>
 
 using namespace corou;
 

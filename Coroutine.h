@@ -2,6 +2,9 @@
 #define __COROUTINE_H__
 
 #include <functional>
+#include <ucontext.h>
+
+#define STACK_SIZE (1024 * 1024)
 
 namespace corou {
 
